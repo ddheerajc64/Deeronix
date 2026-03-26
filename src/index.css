@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Sora:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #fff8e7;
+  --text: #1a1a1a;
+  --card: #ffffff;
+  --accent: #ffd60a;
+  --muted: rgba(26, 26, 26, 0.68);
+  --border: rgba(26, 26, 26, 0.15);
+  --shadow: 0 20px 45px -28px rgba(24, 20, 7, 0.32);
+  --mesh-a: rgba(255, 214, 10, 0.45);
+  --mesh-b: rgba(255, 168, 0, 0.28);
+  --mesh-c: rgba(255, 255, 255, 0.45);
+  --surface-gloss: rgba(255, 255, 255, 0.45);
+  --accent-ring: rgba(255, 214, 10, 0.26);
+}
+
+[data-theme="dark"] {
+  --bg: #0b0f14;
+  --text: #eaeaea;
+  --card: rgba(255, 255, 255, 0.05);
+  --accent: #00f5ff;
+  --muted: rgba(234, 234, 234, 0.7);
+  --border: rgba(0, 245, 255, 0.28);
+  --shadow: 0 30px 70px -35px rgba(0, 245, 255, 0.42);
+  --mesh-a: rgba(0, 245, 255, 0.22);
+  --mesh-b: rgba(0, 142, 170, 0.16);
+  --mesh-c: rgba(255, 255, 255, 0.06);
+  --surface-gloss: rgba(255, 255, 255, 0.08);
+  --accent-ring: rgba(0, 245, 255, 0.32);
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'Sora', 'Segoe UI', 'Trebuchet MS', sans-serif;
+  line-height: 1.5;
+  background-image:
+    radial-gradient(circle at 10% -10%, var(--mesh-a) 0%, transparent 32%),
+    radial-gradient(circle at 86% -5%, var(--mesh-b) 0%, transparent 28%),
+    radial-gradient(circle at 50% 115%, var(--mesh-c) 0%, transparent 35%);
+  transition:
+    background-color 240ms ease,
+    color 240ms ease,
+    background-image 300ms ease;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: 'Fraunces', Georgia, 'Times New Roman', serif;
+  letter-spacing: 0.01em;
+}
+
+a,
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+::selection {
+  background: var(--accent);
+  color: #111111;
+}
+
+.surface-card {
+  background: linear-gradient(160deg, var(--surface-gloss) 0%, transparent 100%) no-repeat,
+    var(--card);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.muted-text {
+  color: var(--muted);
+}
+
+.accent-ring {
+  box-shadow:
+    0 0 0 1px var(--border),
+    0 0 0 4px var(--accent-ring);
+}
+
+.button-base {
+  position: relative;
+  overflow: hidden;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    box-shadow 220ms ease,
+    transform 180ms ease,
+    opacity 180ms ease;
+  will-change: transform;
+}
+
+.button-ripple {
+  position: absolute;
+  transform: translate(-50%, -50%) scale(0);
+  border-radius: 9999px;
+  pointer-events: none;
+  background: currentColor;
+  opacity: 0.25;
+  animation: button-ripple 600ms ease-out forwards;
+}
+
+[data-theme="dark"] .button-ripple {
+  opacity: 0.35;
+}
+
+@keyframes button-ripple {
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0;
+  }
+}
+
+@media (hover: none) {
+  .button-base {
+    transition: transform 120ms ease, opacity 120ms ease;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    background-image:
+      radial-gradient(circle at 16% -10%, var(--mesh-a) 0%, transparent 35%),
+      radial-gradient(circle at 84% 0%, var(--mesh-b) 0%, transparent 33%);
+  }
+}
